@@ -1,0 +1,74 @@
+{% extends 'base_client.html' %}
+
+{% block content %}
+<h1> Detalii cont</h1>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 12px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2; 
+    }
+
+    td {
+        font-weight: bold;
+    }
+
+   
+    .custom-div {
+        width: 100px;
+        height: 40px;
+        background-color: rgb(28, 107, 46);
+        text-align: center;
+        line-height: 40px;
+        transition: background-color 0.3s;
+    }
+
+    .custom-div:hover {
+        background-color: rgb(0, 128, 255);
+    }
+
+    .custom-div a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+</style>
+
+<table>
+    <tr>
+        <td><strong>Nume</strong></td>
+        <td>{{ cont[1] }}</td>
+    </tr>
+    <tr>
+        <td><strong>Adresa</strong></td>
+        <td>{{ cont[2] }}</td>
+    </tr>
+    <tr>
+        <td><strong>Telefon</strong></td>
+        <td>{{ cont[3] }}</td>
+    </tr>
+    <tr>
+        <td><strong>Email</strong></td>
+        <td>{{ cont[4] }}</td>
+    </tr>
+    <tr>
+        <td><strong>Card</strong></td>
+        <td>{{ cont[6] }}</td>
+    </tr>
+</table>
+<br>
+<br>
+
+<div class="custom-div">
+    <a href="/editeaza_profil">Editeaza</a>
+</div>
+
+{% endblock %}

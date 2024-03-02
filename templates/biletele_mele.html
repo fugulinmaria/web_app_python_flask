@@ -1,0 +1,143 @@
+{% extends 'base_client.html' %}
+
+
+
+{% block content %}
+
+<style>
+    .custom-div {
+        width: 200px;
+        height: 50px;
+        background-color: rgb(28, 107, 46);
+        text-align: center;
+        line-height: 40px;
+        transition: background-color 0.3s;
+    }
+    
+    .custom-div:hover {
+        background-color: rgb(0, 128, 255);
+    }
+    
+    .custom-div a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+    
+    button {
+    width: 100px;
+    height: 40px;
+    background-color: rgb(0, 128, 255);
+    color: #ffffff;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: rgb(28, 107, 46);}
+   
+    table {
+        border-collapse: collapse;
+        width: 75%;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 6px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2; 
+    }
+
+    
+
+   
+    .custom-div {
+        width: 100px;
+        height: 40px;
+        background-color: rgb(28, 107, 46);
+        text-align: center;
+        line-height: 40px;
+        transition: background-color 0.3s;
+    }
+
+    .custom-div:hover {
+        background-color: rgb(0, 128, 255);
+    }
+
+    .custom-div a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+    
+
+        .center-heading {
+            text-align: center;
+        }
+    
+</style>
+
+<center>
+    <div class= "container">
+<h1>Biletele Mele:</h1>
+    </div>
+    <br>
+    <br>
+    
+</center>
+
+<br><br><br>
+<center>
+{% for bilet in bilete %}
+<table>
+    <thead>
+        <tr>
+            <th>Nume Client</th>
+            <th>Nume Spectacol</th>
+            <th>Data Spectacol</th>
+            <th>Ora Spectacol</th>
+            <th>Locatie</th>
+            <th>Adresa</th>
+            <th>Pret Bilet</th>
+            <th>Tip Bilet</th>
+            <th>Cod Bilet</th>
+            <th>Data Comanda</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+              <td>{{ bilet[0] }}</td>
+              <td>{{ bilet[1] }}</td>
+              <td>{{ bilet[2] }}</td>
+              <td>{{ bilet[3] }}</td>
+              <td>{{ bilet[4] }}</td>
+              <td>{{ bilet[5] }}</td>
+              <td>{{ bilet[6] }}</td>
+              <td>{{ bilet[7] }}</td>
+              <td>{{ bilet[8] }}</td>
+              <td>{{ bilet[9] }}</td>
+        </tr>
+    </tbody>
+</table>
+<br>
+    <br>
+    <br>
+{% endfor %}
+</center>
+  
+
+    <br>
+    <br>
+    <br>
+
+
+
+
+
+
+{% endblock %}

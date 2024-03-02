@@ -1,0 +1,169 @@
+{% extends 'base_admin.html' %}
+
+
+
+{% block content %}
+
+<style>
+    .custom-div {
+        width: 200px;
+        height: 50px;
+        background-color: rgb(28, 107, 46);
+        text-align: center;
+        line-height: 40px;
+        transition: background-color 0.3s;
+    }
+    
+    .custom-div:hover {
+        background-color: rgb(0, 128, 255);
+    }
+    
+    .custom-div a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+    
+    button {
+    width: 100px;
+    height: 60px;
+    background-color: rgb(0, 128, 255);
+    color: #ffffff;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: rgb(28, 107, 46);}
+   
+    table {
+        border-collapse: collapse;
+        width: 80%;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 6px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2; 
+    }
+
+    
+
+   
+    .custom-div {
+        width: 100px;
+        height: 40px;
+        background-color: rgb(28, 107, 46);
+        text-align: center;
+        line-height: 40px;
+        transition: background-color 0.3s;
+    }
+
+    .custom-div:hover {
+        background-color: rgb(0, 128, 255);
+    }
+
+    .custom-div a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+</style>
+
+<center>
+<h2>Adauga Spectacol:</h2>
+</center>
+{% if no_com == True %}
+<b style="color: red;">  E nevoie sa invitati macar un comediant!!</b><br>
+{% endif %}
+<br>
+<form method = "POST" action="#">
+    <label for = "nume_spectacol">Denumire:</label><br>
+    <input type = "text" name = "nume_spectacol" value="{{ spectacol[1] }}" required><br>
+    <br>
+    <label for = "data_spec">Data Spectacol:</label><br>
+    <input type = "date" min="2024-01-01" value="{{ spectacol[2] }}" name = "data_spec" required><br>
+    <br>
+    <label for = "ora">Ora:</label><br>
+    <input type ="time" value="{{ spectacol[3] }}" name = "ora" required ><br>
+    <br>
+    <label for = "descriere_spec">Descriere:</label><br>
+    <input type = "text" value="{{ spectacol[4] }}" name="descriere_spec" required><br>
+    <br>
+    <label for = "bilete_max">Nr maxim bilete:</label><br>
+    <input type = "number" value="{{ spectacol[6] }}" min="1" name="bilete_max" required><br>
+    <br>
+    <label for = "pret_bilet">Pret Bilet:</label><br>
+    <input type = "number" value="{{ spectacol[7] }}" min="1" name="pret_bilet" required><br>
+    <br>
+    <label for="locatie">Alegeti Locatia:</label>
+    <br>
+    <select name="locatie" >
+        {% for loc in locatii %}
+        <option {% if loc[0] == spectacol[5] %} selected {% endif %} value="{{ loc[0] }}">{{ loc[1] }} </option>
+        {% endfor %}
+    </select>
+    <br><br><br>
+
+    <p> Comedianti invitati:</p>
+    <table>
+        <thead>
+            <tr>
+                
+                <th>Invita</th>
+                <th>Nume</th>
+                <th>Rating</th>
+                <th>Descriere</th>
+            </tr>
+        </thead>
+        <tbody>
+    {% for com in comedianti %}
+    <tr>
+        <td>
+            <input type="checkbox" {% if com[0] in comediantii_mei %} checked {% endif %} name="com{{ com[0] }}">
+        </td>
+        <td>
+            <label for="com{{ com[0] }}"> {{ com[1] }}</label><br>
+        </td>
+        <td>
+            {{ com[5] }}
+        </td>
+        <td>
+            {{ com[4] }}
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    <br>
+    <br>
+    {% if no_com == True %}
+<b style="color: red;">  E nevoie sa invitati macar un comediant!!</b><br>
+{% endif %}
+    <button type="submit"><b>Confirma Editarea</b></button><br>
+</form>
+<br><br><br>
+<div class="custom-div" style="background-color: red;">
+    <a href="/profil_admin/spectacole">Anuleaza</a></div>
+
+
+    <br>
+    <br>
+
+
+    
+    <br>
+    <br>
+
+
+
+
+
+
+{% endblock %}

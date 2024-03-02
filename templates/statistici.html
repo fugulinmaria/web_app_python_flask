@@ -1,0 +1,257 @@
+{% extends 'base_admin.html' %}
+
+
+
+{% block content %}
+
+<style>
+    .custom-div {
+        width: 200px;
+        height: 50px;
+        background-color: rgb(28, 107, 46);
+        text-align: center;
+        line-height: 40px;
+        transition: background-color 0.3s;
+    }
+    
+    .custom-div:hover {
+        background-color: rgb(0, 128, 255);
+    }
+    
+    .custom-div a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+    
+    button {
+    width: 100px;
+    height: 40px;
+    background-color: rgb(0, 128, 255);
+    color: #ffffff;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: rgb(28, 107, 46);}
+   
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 12px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2; 
+    }
+
+    td {
+        font-weight: bold;
+    }
+
+   
+    .custom-div {
+        width: 100px;
+        height: 40px;
+        background-color: rgb(28, 107, 46);
+        text-align: center;
+        line-height: 40px;
+        transition: background-color 0.3s;
+    }
+
+    .custom-div:hover {
+        background-color: rgb(0, 128, 255);
+    }
+
+    .custom-div a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+</style>
+
+<center>
+    <div class= "container">
+<h1>Statistici:</h1>
+    </div>
+    <br>
+    <br>
+    <br>
+    <h2 > Clientii si numarul de comenzi ale lor care au totalul peste media totalurilor comenzilor </h2>
+    <table>
+        <thead>
+            <tr>
+                <td>Nume</td>
+                <td>Nr Comenzi de interes</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cl in cl_bogati %}
+            <tr>
+                <td>{{ cl[0] }}</td>
+                <td>{{ cl[1] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <br>
+    <h2 > Afiseaza spectacolele care au ratingul mediu al comediantilor mai mare decat media ratingului tuturor comediantilor </h2>
+
+    <table>
+        <thead>
+            <tr>
+                <td>Nume</td>
+                <td>Rating Mediu</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in spec_frumoase %}
+            <tr>
+                <td>{{ s[0] }}</td>
+                <td>{{ s[1] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+    <br>
+    <br>
+    <br>
+    <h2 > Afiseaza comediantii care nu sunt invitati la niciun spectacol </h2>
+
+    <table>
+        <thead>
+            <tr>
+                <td>Nume</td>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in comedianti_lenesi %}
+            <tr>
+                <td>{{ c[0] }}</td>
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <br>
+    <br>
+    <h2 > Clientii care au plasat cel putin o comanda </h2>
+    <table>
+        <thead>
+            <tr>
+                <td>Nume</td>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in clienti_activi %}
+            <tr>
+                <td>{{ c[0] }}</td>
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <br>
+    <br>
+    <h2 > Comenzi care contin bilete la toate spectacolele </h2>
+
+    {% for comanda in lista_comenzi %}
+<table>
+    <thead>
+        <tr>
+            <th>Nume</th>
+            <th>Data Comanda</th>
+            <th>Cod Comanda</th>
+            <th>Metoda Platii</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+              <td>{{ comanda[0][4] }}</td>
+              <td>{{ comanda[0][3] }}</td>
+              <td>{{ comanda[0][0] }}</td>
+              <td>{{ comanda[0][1] }}</td>
+              <td>{{ comanda[0][2] }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+        <tr>
+            <th colspan="7" class="center-heading">
+                Bilete
+            </th>
+        </tr>
+    </thead>
+    <thead>
+        <tr>
+            <th>Nume Spectacol</th>
+            <th>Data Spectacol</th>
+            <th>Ora Spectacol</th>
+            <th>Pret Bilet</th>
+            <th>Tip Bilet</th>
+            <th>Nr Bilete</th>
+            <th>Total Pret</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for bilet in comanda[1] %}
+            <tr>
+              <td>{{ bilet[0] }}</td>
+              <td>{{ bilet[1] }}</td>
+              <td>{{ bilet[2] }}</td>
+              {% if bilet[4] == "adult" %}
+              <td>{{ bilet[6] }}</td>
+              {% else %}
+              <td>{{ bilet[6] / 2 }}</td>
+              {% endif %}
+              <td>{{ bilet[4] }}</td>
+              <td>{{ bilet[3] }}</td>
+              {% if bilet[4] == "adult" %}
+              <td>{{ bilet[5] }}</td>
+              {% else %}
+              <td>{{ bilet[5] / 2 }}</td>
+              {% endif %}
+              
+            </tr>
+            {% endfor %}
+    </tbody>
+</table>
+
+<br>
+<br>
+<br>
+{% endfor %}
+</center>
+    
+
+
+    <br>
+    <br>
+    <br>
+
+
+
+
+
+
+{% endblock %}

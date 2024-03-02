@@ -1,0 +1,193 @@
+{% extends 'base_client.html' %}
+
+
+
+{% block content %}
+
+<style>
+    .custom-div {
+        width: 200px;
+        height: 50px;
+        background-color: rgb(28, 107, 46);
+        text-align: center;
+        line-height: 40px;
+        transition: background-color 0.3s;
+    }
+    
+    .custom-div:hover {
+        background-color: rgb(0, 128, 255);
+    }
+    
+    .custom-div a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+    
+    button {
+    width: 200px;
+    height: 60px;
+    background-color: rgb(0, 128, 255);
+    color: #ffffff;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: rgb(28, 107, 46);}
+   
+    table {
+        border-collapse: collapse;
+        width: 75%;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 6px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2; 
+    }
+
+    
+
+   
+    .custom-div {
+        width: 100px;
+        height: 40px;
+        background-color: rgb(28, 107, 46);
+        text-align: center;
+        line-height: 40px;
+        transition: background-color 0.3s;
+    }
+
+    .custom-div:hover {
+        background-color: rgb(0, 128, 255);
+    }
+
+    .custom-div a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+    
+
+        .center-heading {
+            text-align: center;
+        }
+    
+</style>
+
+<center>
+    <div class= "container">
+<h1>Catalog Spectacole:</h1>
+    </div>
+    <br>
+    <br>
+    
+</center>
+
+<br><br><br>
+<center>
+    <form method = "POST" action="#">
+{% for spectacol in lista_spectacole %}
+<table>
+    <thead>
+        <tr>
+            <th colspan="7" class="center-heading">
+                <div>
+                    {{ spectacol[0][1] }}
+                </div>
+            </th>
+        </tr>
+    </thead>
+    <thead>
+        <tr>
+            <th>Data</th>
+            <th>Ora</th>
+            <th>Descriere</th>
+            <th>Locatie</th>
+            <th>Adresa</th>
+            <th>Bilete Disponibile</th>
+            <th>Pret Bilet</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+              <td>{{ spectacol[0][2] }}</td>
+              <td>{{ spectacol[0][3] }}</td>
+              <td>{{ spectacol[0][4] }}</td>
+              <td>{{ spectacol[0][7] }}</td>
+              <td>{{ spectacol[0][8] }}</td>
+              <td>{{ spectacol[3] }}</td>
+              <td>{{ spectacol[0][6] }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+        <tr>
+            <th colspan="2" class="center-heading">
+                Comedianti
+            </th>
+        </tr>
+    </thead>
+    <thead>
+        <tr>
+            <th>Nume</th>
+            <th>Rating</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for com in spectacol[1] %}
+            <tr>
+              <td>{{ com[0] }}</td>
+              <td>{{ com[1] }}</td>
+            </tr>
+            {% endfor %}
+            <tr >
+                <td colspan="2">
+                    Rating Mediu:{{ spectacol[2] }}
+                </td>
+            </tr>
+        <tr >
+            <td >
+                <label for = "nr_bilete">Nr Bilete:</label><br>
+                <input type = "number" value="0" min="0" max="{{ spectacol[3] }}" name="nr_bilete_{{ spectacol[0][0] }}" ><br>
+ 
+            </td>
+            <td >
+                {% if spectacol[3] > 0 %}
+                <label for = "nr_bilete">Bilet Adult:</label><br>
+                <input type = "radio" checked="checked" value="adult"  name="tip_bilet_{{ spectacol[0][0] }}" ><br>
+                <label for = "nr_bilete">Bilet Student:</label><br>
+                <input type = "radio" value="student"  name="tip_bilet_{{ spectacol[0][0] }}" ><br>
+                <p>Studentii beneficiaza de 50% reducere</p>
+                {% else %}
+                <p>Biletele au fost epuizate!</p>
+                {% endif %}
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<br>
+    <br>
+    <br>
+{% endfor %}
+<button type="submit"><b>Finalizeaza Comanda</b></button><br>
+</form>
+</center>
+
+    <br>
+    <br>
+    <br>
+
+{% endblock %}

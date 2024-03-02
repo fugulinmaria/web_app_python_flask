@@ -1,0 +1,73 @@
+{% extends 'base_client.html' %}
+
+{% block content %}
+
+<style>
+.custom-div {
+    width: 100px;
+    height: 40px;
+    background-color: rgb(28, 107, 46);
+    text-align: center;
+    line-height: 40px;
+    transition: background-color 0.3s;
+}
+
+.custom-div:hover {
+    background-color: rgb(0, 128, 255);
+}
+
+.custom-div a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+button {
+    width: 100px;
+    height: 40px;
+    background-color: rgb(0, 128, 255);
+    color: #ffffff;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: rgb(28, 107, 46);}
+
+</style>
+
+<form action = "#" method = "POST">
+    <center>
+        <div class= "container">
+            <input type = 'text' placeholder="Nume" value = "{{ cont[1] }}" name = 'nume' requiered><br>
+            <br>
+            <input type = 'text' placeholder="Adresa" value = "{{ cont[2] }}" name = 'adresa' requiered><br>
+            <br>
+            <input type = 'text' placeholder="Telefon" value = "{{ cont[3] }}" name = 'telefon' requiered><br>
+            <br>
+            <input type = 'text' placeholder="Email" value = "{{ cont[4] }}" name = 'mail' requiered><br>
+            <br>
+            <input type = 'text' placeholder="Card" value = "{{ cont[6] }}" name = 'card' requiered><br>
+            <br>
+
+            {% if wrong_email == True %}
+                <b style="color: red;">  Deja exista un cont asociat acestei adrese de email!</b><br>
+            {% endif %}
+            <br>
+            <div><button type="submit"><b>Submit</b></div>
+            <br>
+            <div class="custom-div">
+                    <a href="/profil_client">Profil</a>
+            </div>
+            <br>
+            <div class="custom-div" style="background-color: red;">
+                <a href="/delete_cont">Stergere cont</a>
+        </div>
+        </div>
+    </center>
+</form>
+
+{% endblock %}

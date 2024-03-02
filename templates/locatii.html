@@ -1,0 +1,160 @@
+{% extends 'base_admin.html' %}
+
+
+
+{% block content %}
+
+<style>
+    .custom-div {
+        width: 200px;
+        height: 50px;
+        background-color: rgb(28, 107, 46);
+        text-align: center;
+        line-height: 40px;
+        transition: background-color 0.3s;
+    }
+    
+    .custom-div:hover {
+        background-color: rgb(0, 128, 255);
+    }
+    
+    .custom-div a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+    
+    button {
+    width: 100px;
+    height: 40px;
+    background-color: rgb(0, 128, 255);
+    color: #ffffff;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: rgb(28, 107, 46);}
+   
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 12px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2; 
+    }
+
+    td {
+        font-weight: bold;
+    }
+
+   
+    .custom-div {
+        width: 100px;
+        height: 40px;
+        background-color: rgb(28, 107, 46);
+        text-align: center;
+        line-height: 40px;
+        transition: background-color 0.3s;
+    }
+
+    .custom-div:hover {
+        background-color: rgb(0, 128, 255);
+    }
+
+    .custom-div a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+</style>
+
+<center>
+    <div class= "container">
+<h1>Gestionare locatii:</h1>
+    </div>
+</center>
+<h2>Adauga locatie:</h2>
+<br>
+<form method = "POST" action="#">
+    <label for = "nume_locatie">Denumire:</label><br>
+    <input type = "text" name = "nume_locatie" required><br>
+    <br>
+    <label for = "adresa">Adresa:</label><br>
+    <input type = "text" name = "adresa" required><br>
+    <br>
+    <label for = "capacitate">Capacitate:</label><br>
+    <input type ="number"  name = "capacitate" min = "1" value = "100"><br>
+    <br>
+    <label for = "detalii">Detalii:</label><br>
+    <input type = "text" name="detalii" required><br>
+
+    {% if exista_loc == True %}
+        <b style="color: red;">  Deja exista aceasta locatie!</b><br>
+    {% endif %}
+
+
+    
+
+    <br>
+    <button type="submit"><b>Adauga</b></button><br>
+</form>
+
+    <br>
+    <br>
+
+
+    <h2>Catalog locatii:</h2>
+    <table>
+        <table>
+            <thead>
+                <tr>
+                    
+                    <th>Denumire</th>
+                    <th>Adresa</th>
+                    <th>Capacitate</th>
+                    <th>Detalii</th>
+                    
+                    <th>Sterge</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rand in lista_loc %}
+                <tr>
+        
+                    <td>{{ rand[1] }}</td>
+                    <td>{{ rand[2] }}</td>
+                    <td>{{ rand[3] }}</td>
+                    <td>{{ rand[4] }}</td>
+                    
+                    <td>
+                        <div class="custom-div" style="background-color: red;">
+                        <a href="/profil_admin/locatii/delete/{{ rand[0] }}">Sterge</a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+                <!-- Additional rows go here -->
+            </tbody>
+        </table>
+        
+    </table>
+    <br>
+    <br>
+    <br>
+
+
+
+
+
+
+{% endblock %}
